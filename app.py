@@ -14,9 +14,13 @@ st.write("Upload a background image and click 'Start Camera' to apply the effect
 bg_file = st.file_uploader("Upload Background Image", type=["jpg", "jpeg", "png"])
 
 if bg_file:
+    # bg_image = Image.open(bg_file).convert("RGBA")
+    # bg_temp_path = os.path.join(tempfile.gettempdir(), "background.jpg")
+    # bg_image.save(bg_temp_path)
     bg_image = Image.open(bg_file).convert("RGBA")
+    bg_rgb = bg_image.convert("RGB")  # Convert to RGB to avoid JPEG transparency error
     bg_temp_path = os.path.join(tempfile.gettempdir(), "background.jpg")
-    bg_image.save(bg_temp_path)
+    bg_rgb.save(bg_temp_path)
 
     if st.button("▶️ Start Camera with Effect"):
         st.success("Launching webcam window. Press 'q' to quit or 's' to save a snapshot.")
